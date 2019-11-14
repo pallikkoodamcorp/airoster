@@ -103,4 +103,13 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
             pattern.append(type);
         }
     }
+    
+    
+    public Classroom applyRecommendations(Classroom classroom, String sugg) {
+    	if(sugg.equals("suffix_teachername")) {
+    		classroom.setClassName(classroom.getClassName()+"_"+classroom.getTeacherUser());
+    	}
+    	classRepository.save(classroom);
+    	return classroom;
+    }
 }

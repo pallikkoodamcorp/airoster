@@ -82,14 +82,29 @@ public class ClassController {
 		} catch (Exception e) {
 			System.out.println("unique constriant error:" + e.getMessage());
 			String errorCode = "1920";
-			ErrorTable errorTable = new ErrorTable();
-			errorTable.setPid(classroom.getPid());
-			errorTable.setIdentifier(classroom.getClassId());
-			errorTable.setErrorCode(errorCode);
-			errorTable.setIdentifierValue(classroom.getClassName());
-			errorTableRepository.save(errorTable);
-			recommendationService.generateRecommendations(classroom.getPid());
-			throw e;
+			
+			List<Recommendation> recList = recommendationRepository.findRecommendationByPidErrorCode(classroom.getPid(), errorCode);
+			
+			if(!recList.isEmpty()) {
+				Recommendation rec = recList.get(0);
+				String acc = rec.getAcceptance();
+				String sugg ="";
+				if (acc.equals("S")) {
+					sugg = rec.getSystemSuggested();
+				}else if (acc.equals("U")){
+					sugg = rec.getUserSuggested();
+				}
+				return recommendationService.applyRecommendations(classroom,sugg);
+			}else {
+				ErrorTable errorTable = new ErrorTable();
+				errorTable.setPid(classroom.getPid());
+				errorTable.setIdentifier(classroom.getClassId());
+				errorTable.setErrorCode(errorCode);
+				errorTable.setIdentifierValue(classroom.getClassName());
+				errorTableRepository.save(errorTable);
+				recommendationService.generateRecommendations(classroom.getPid());
+				throw e;
+			}
 		}
 	}
 
