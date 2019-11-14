@@ -1,17 +1,16 @@
 package com.ai.rostering.model;
 
-import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Getter
+/*@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder*/
 @Entity
 public class Recommendation {
 
@@ -30,7 +29,7 @@ public class Recommendation {
 	private String acceptance;
 	
 	
-	/*public Recommendation() {
+	public Recommendation() {
 		super();
 	}
 
@@ -90,5 +89,5 @@ public class Recommendation {
 
 	public void setAcceptance(String acceptance) {
 		this.acceptance = acceptance;
-	}*/
+	}
 }

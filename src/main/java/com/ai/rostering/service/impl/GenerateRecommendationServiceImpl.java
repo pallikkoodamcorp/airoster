@@ -60,11 +60,10 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
                                 generatePattern(pattern,"grade",addon);
                             }
                         }
-                        Recommendation recommendation = Recommendation.builder()
-                                .errorCode("1920")
-                                .systemSuggested(pattern.toString())
-                                .pid(errorTable.getPid())
-                                .build();
+                        Recommendation recommendation = new Recommendation();
+                        recommendation.setErrorCode("1920");
+                        recommendation.setPid(errorTable.getPid());
+                        recommendation.setSystemSuggested(pattern.toString());
                         recommendationRepository.save(recommendation);
                     } else{
 
