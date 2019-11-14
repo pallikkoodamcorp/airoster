@@ -14,4 +14,5 @@ public interface SuccessTableRepository extends JpaRepository<SuccessTable, Long
 	@Query("select et from SuccessTable et where et.pid = ?#{[0]}")
 	public List<SuccessTable> findSuccessTableByPid(String pid);
 
+
 }

@@ -3,8 +3,10 @@ package com.ai.rostering.service.impl;
 import com.ai.rostering.controller.ClassController;
 import com.ai.rostering.model.Classroom;
 import com.ai.rostering.model.ErrorTable;
+import com.ai.rostering.model.Recommendation;
 import com.ai.rostering.model.SuccessTable;
 import com.ai.rostering.repository.ClassRepository;
+import com.ai.rostering.repository.RecommendationRepository;
 import com.ai.rostering.service.GenerateRecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
 
     @Autowired
     ClassRepository classRepository;
+
+    @Autowired
+    RecommendationRepository recommendationRepository;
 
     @Override
     public String generateRecommendations(String distpid) {
@@ -55,6 +60,14 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
                                 generatePattern(pattern,"grade",addon);
                             }
                         }
+                        Recommendation recommendation = Recommendation.builder()
+                                .errorCode("1920")
+                                .systemSuggested(pattern.toString())
+                                .pid(errorTable.getPid())
+                                .build();
+                        recommendationRepository.save(recommendation);
+                    } else{
+
                     }
                 });
             }
