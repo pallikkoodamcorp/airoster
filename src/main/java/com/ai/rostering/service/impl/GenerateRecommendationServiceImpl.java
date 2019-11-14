@@ -40,8 +40,9 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
 
     private void getMatchedSuccessData(List<ErrorTable> errorTables,List<SuccessTable> successTables){
         errorTables.forEach(errorTable -> {
-            List<Recommendation> recommendationList= recommendationRepository.findRecommendationByPidErrorCode(errorTable.getPid(),errorTable.getErrorCode());
-            if(recommendationList ==null ){
+            List<Recommendation> recommendationList=
+                    recommendationRepository.findRecommendationByPidErrorCode(errorTable.getPid(),errorTable.getErrorCode());
+            if(recommendationList == null || recommendationList.isEmpty()){
                 if(errorTable.getErrorCode().equalsIgnoreCase("1920")){
                     successTables.forEach(successTable -> {
                         if(errorTable.getIdentifier().equalsIgnoreCase(successTable.getIdentifier())){
