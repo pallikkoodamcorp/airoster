@@ -1,4 +1,4 @@
-package com.ai.rostering.model;
+package com.ai.rostering.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
