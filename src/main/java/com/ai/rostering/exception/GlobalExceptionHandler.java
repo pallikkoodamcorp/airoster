@@ -33,7 +33,7 @@ import java.util.Date;
  *
  * @author karthickumarvp
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 
   /**
