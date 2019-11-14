@@ -24,13 +24,6 @@ public class ErrorTable {
 		this.pid = pid;
 	}
 
-	public Long getBatchId() {
-		return batchId;
-	}
-
-	public void setBatchId(Long batchId) {
-		this.batchId = batchId;
-	}
 
 	public String getErrorCode() {
 		return errorCode;
@@ -44,6 +37,14 @@ public class ErrorTable {
 		return identifier;
 	}
 
+	public String getIdentifierValue() {
+		return identifierValue;
+	}
+
+	public void setIdentifierValue(String identifierValue) {
+		this.identifierValue = identifierValue;
+	}
+
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}
@@ -54,10 +55,10 @@ public class ErrorTable {
 	
 	private String pid;
 	
-	private Long batchId;
+	private String identifier;
 	
 	private String errorCode;
 	
-	private String identifier;
+	private String identifierValue;
 
 }

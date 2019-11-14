@@ -8,28 +8,27 @@ import javax.persistence.Id;
 @Entity
 public class SuccessTable {
 	
+	public String getIdentifierValue() {
+		return identifierValue;
+	}
+
+	public void setIdentifierValue(String identifierValue) {
+		this.identifierValue = identifierValue;
+	}
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long id;
 	
 	private String pid;
 	
-	private Long batchId;
-	
 	private String identifier;
+	
+	private String identifierValue;
 	
 	public SuccessTable() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-
-	public SuccessTable(Long id, String pid, Long batchId, String identifier) {
-		super();
-		this.id = id;
-		this.pid = pid;
-		this.batchId = batchId;
-		this.identifier = identifier;
 	}
 
 	public Long getId() {
@@ -46,14 +45,6 @@ public class SuccessTable {
 
 	public void setPid(String pid) {
 		this.pid = pid;
-	}
-
-	public Long getBatchId() {
-		return batchId;
-	}
-
-	public void setBatchId(Long batchId) {
-		this.batchId = batchId;
 	}
 
 	public String getIdentifier() {

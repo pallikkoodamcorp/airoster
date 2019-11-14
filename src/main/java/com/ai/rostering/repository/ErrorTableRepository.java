@@ -11,6 +11,6 @@ import com.ai.rostering.model.ErrorTable;
 @Repository
 public interface ErrorTableRepository extends JpaRepository<ErrorTable, Long>{
 	
-	@Query("select et from ErrorTable et where et.pid = ?#{[0]}")
-	public List<ErrorTable> findErrorTableByPid(String pid);
+	@Query("select et from ErrorTable et where et.pid = ?#{[0]} and et.identifier = ?#{[1]}")
+	public List<ErrorTable> findErrorTableByPid(String pid, String identifier);
 }

@@ -19,7 +19,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "class")
+@Table(name = "classroom")
 @EntityListeners(AuditingEntityListener.class)
 public class Classroom {
 
@@ -29,6 +29,9 @@ public class Classroom {
 
 	@Column(name = "class_name", nullable = false, unique=true)
 	private String className;
+	
+	@Column(name = "class_id", nullable = false, unique=true)
+	private String classId;
 
 	@Column(name = "teacher_user", nullable = false)
 	private String teacherUser;
@@ -182,6 +185,14 @@ public class Classroom {
 
 	public void setPid(String pid) {
 		this.pid = pid;
+	}
+	
+	public String getClassId() {
+		return classId;
+	}
+
+	public void setClassId(String classId) {
+		this.classId = classId;
 	}
 
 }
