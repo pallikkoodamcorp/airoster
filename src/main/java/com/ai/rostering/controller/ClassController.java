@@ -68,6 +68,7 @@ public class ClassController {
 		boolean isSuccessfull = true;
 		try {
 			classRepository.save(classroom);
+			
 			List<ErrorTable> list = errorTableRepository.findErrorTableByPid(classroom.getPid(),
 					classroom.getClassId());
 			if (list != null && !list.isEmpty()) {
