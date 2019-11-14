@@ -65,7 +65,7 @@ public class ClassController {
 	@PostMapping(path = "/classes", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Classroom createClass(@Valid @RequestBody Classroom classroom) {
-		boolean isSusccessfull = true;
+		boolean isSuccessfull = true;
 		try {
 			classRepository.save(classroom);
 			List<ErrorTable> list = errorTableRepository.findErrorTableByPid(classroom.getPid(),
@@ -101,5 +101,15 @@ public class ClassController {
 	@PostMapping("/saveRecommendation")
 	public void saveRecommendation(@RequestBody Recommendation recommendation) {
 		recommendationRepository.save(recommendation);
+	}
+	
+	@GetMapping("/fetchErrors")
+	public List<ErrorTable> findErrorTableByPid(@RequestParam("pid") String pid ) {
+	  	return errorTableRepository.findErrorTable(pid); 
+	}
+	
+	@GetMapping("/fetchSuccess")
+	public List<SuccessTable> findSuccessByPid(@RequestParam("pid") String pid) { 
+	  	return successTableRepository.findSuccessTableByPid(pid); 
 	}
 }
