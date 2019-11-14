@@ -32,47 +32,48 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
         List<ErrorTable> errorTables =  classController.findErrorTableByPid(distpid);
         List<SuccessTable> successTables = classController.findSuccessByPid(distpid);
         if(errorTables !=null && successTables != null) {
-            getMatchedSucessData(errorTables, successTables);
+            getMatchedSuccessData(errorTables, successTables);
             return "generated";
         }
         return "no recommendations";
     }
 
-    private void getMatchedSucessData(List<ErrorTable> errorTables,List<SuccessTable> successTables){
+    private void getMatchedSuccessData(List<ErrorTable> errorTables,List<SuccessTable> successTables){
         errorTables.forEach(errorTable -> {
-            if(errorTable.getErrorCode().equalsIgnoreCase("1920")){
-                successTables.forEach(successTable -> {
-                    if(errorTable.getIdentifier().equalsIgnoreCase(successTable.getIdentifier())){
-                        Classroom classData = classRepository.findClassroomByClassId(successTable.getIdentifier());
-                        String day1 = errorTable.getIdentifierValue();
-                        String day2 = successTable.getIdentifierValue();
-                        String grade = classData.getGrade();
-                        //String period = classData.get;
-                        String teacher = classData.getTeacherUser();
-                        String additional = "";
-                        StringBuffer pattern=new StringBuffer();
-                        if (day2.contains(day1)) {
-                            additional = findSubString(day2,day1,pattern,0);
-                        }
-                        if (additional != "") {
-                            if (additional.indexOf(teacher) != -1) {
-                                String addon = findSubString(additional,teacher,pattern,1);
-                                generatePattern(pattern,"teachername",addon);
-                            } else if (additional.indexOf(grade) != -1) {
-                                String addon = findSubString(additional,grade,pattern,1);
-                                generatePattern(pattern,"grade",addon);
+            List<Recommendation> recommendationList= recommendationRepository.findRecommendationByPidErrorCode(errorTable.getPid(),errorTable.getErrorCode());
+            if(recommendationList ==null ){
+                if(errorTable.getErrorCode().equalsIgnoreCase("1920")){
+                    successTables.forEach(successTable -> {
+                        if(errorTable.getIdentifier().equalsIgnoreCase(successTable.getIdentifier())){
+                            Classroom classData = classRepository.findClassroomByClassId(successTable.getIdentifier());
+                            String day1 = errorTable.getIdentifierValue();
+                            String day2 = successTable.getIdentifierValue();
+                            String grade = classData.getGrade();
+                            String teacher = classData.getTeacherUser();
+                            String additional = "";
+                            StringBuffer pattern=new StringBuffer();
+                            if (day2.contains(day1)) {
+                                additional = findSubString(day2,day1,pattern,0);
                             }
-                        }
-                        Recommendation recommendation = new Recommendation();
-                        recommendation.setErrorCode("1920");
-                        recommendation.setPid(errorTable.getPid());
-                        recommendation.setSystemSuggested(pattern.toString());
-                        recommendationRepository.save(recommendation);
+                            if (additional != "") {
+                                if (additional.indexOf(teacher) != -1) {
+                                    String addon = findSubString(additional,teacher,pattern,1);
+                                    generatePattern(pattern,"teachername",addon);
+                                } else if (additional.indexOf(grade) != -1) {
+                                    String addon = findSubString(additional,grade,pattern,1);
+                                    generatePattern(pattern,"grade",addon);
+                                }
+                            }
+                            Recommendation recommendation = new Recommendation();
+                            recommendation.setErrorCode("1920");
+                            recommendation.setPid(errorTable.getPid());
+                            recommendation.setSystemSuggested(pattern.toString());
+                            recommendationRepository.save(recommendation);
 
-                    } else{
-
-                    }
-                });
+                        } else{
+                     }
+                    });
+                }
             }
         });
     }
