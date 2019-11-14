@@ -18,7 +18,7 @@
  *
  */
 
-package com.ai.rostering.exception;
+package com.staxrt.tutorial.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * The type Resource not found exception.
  *
- * @author Givantha Kalansuriya
+ * @author karthickumarvp
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends Exception {

@@ -18,18 +18,14 @@
  *
  */
 
-package com.ai.rostering.controller;
+package com.staxrt.tutorial.controller;
 
-import com.ai.rostering.exception.ResourceNotFoundException;
-import com.ai.rostering.model.User;
-import com.ai.rostering.repository.UserRepository;
-
+import com.staxrt.tutorial.exception.ResourceNotFoundException;
+import com.staxrt.tutorial.model.User;
+import com.staxrt.tutorial.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -54,7 +50,7 @@ public class UserController {
    *
    * @return the list
    */
-  @GetMapping(path="/users", produces=MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping("/users")
   public List<User> getAllUsers() {
     return userRepository.findAll();
   }
@@ -82,9 +78,9 @@ public class UserController {
    * @param user the user
    * @return the user
    */
-  @PostMapping(path = "/users", consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+  @PostMapping("/users")
   public User createUser(@Valid @RequestBody User user) {
-	   return userRepository.save(user);
+    return userRepository.save(user);
   }
 
   /**

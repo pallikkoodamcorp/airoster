@@ -18,7 +18,7 @@
  *
  */
 
-package com.ai.rostering.exception;
+package com.staxrt.tutorial.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +31,7 @@ import java.util.Date;
 /**
  * The type Global exception handler.
  *
- * @author Givantha Kalansuriya
+ * @author karthickumarvp
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {

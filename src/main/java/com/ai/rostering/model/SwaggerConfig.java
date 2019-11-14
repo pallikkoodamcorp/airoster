@@ -1,4 +1,4 @@
-package com.ai.rostering.model;
+package com.staxrt.tutorial.model;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

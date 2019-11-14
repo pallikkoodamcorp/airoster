@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.staxrt.tutorial</groupId>
-	<artifactId>spring-boot-rest-api-tutorial</artifactId>
+	<groupId>com.hmh.ai.roster</groupId>
+	<artifactId>airoster</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
-	<name>spring-boot-rest-api-tutorial</name>
-	<description>Sample REST CRUD API project using Spring Boot, Mysql, JPA and Hibernate</description>
+	<name>AI Based Rostering for Import</name>
+	<description>AI Based Rostering for Import</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
