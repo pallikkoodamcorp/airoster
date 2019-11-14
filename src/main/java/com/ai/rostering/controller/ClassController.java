@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.ai.rostering.service.GenerateRecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,9 @@ public class ClassController {
 	@Autowired
 	private RecommendationRepository recommendationRepository;
 
+	@Autowired
+	private GenerateRecommendationService recommendationService;
+
 	/**
 	 * Get all users list.
 	 *
@@ -55,15 +59,13 @@ public class ClassController {
 	}
 
 	/**
-	 * Create user user.
+	 * Create class.
 	 *
-	 * @param user
-	 *            the user
-	 * @return the user
 	 */
 	@PostMapping(path = "/classes", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Classroom createClass(@Valid @RequestBody Classroom classroom) {
+		boolean isSusccessfull = true;
 		try {
 			classRepository.save(classroom);
 			List<ErrorTable> list = errorTableRepository.findErrorTableByPid(classroom.getPid(),
@@ -85,6 +87,7 @@ public class ClassController {
 			errorTable.setErrorCode(errorCode);
 			errorTable.setIdentifierValue(classroom.getClassName());
 			errorTableRepository.save(errorTable);
+			recommendationService.generateRecommendations(classroom.getPid());
 			throw e;
 		}
 	}
