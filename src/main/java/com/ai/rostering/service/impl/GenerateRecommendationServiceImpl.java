@@ -31,8 +31,11 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
     public String generateRecommendations(String distpid) {
         List<ErrorTable> errorTables =  classController.findErrorTableByPid(distpid);
         List<SuccessTable> successTables = classController.findSuccessByPid(distpid);
-        getMatchedSucessData(errorTables,successTables);
-        return "";
+        if(errorTables !=null && successTables != null) {
+            getMatchedSucessData(errorTables, successTables);
+            return "generated";
+        }
+        return "no recommendations";
     }
 
     private void getMatchedSucessData(List<ErrorTable> errorTables,List<SuccessTable> successTables){
