@@ -18,11 +18,12 @@
  *
  */
 
-package com.staxrt.tutorial.controller;
+package com.ai.rostering.controller;
 
-import com.staxrt.tutorial.exception.ResourceNotFoundException;
-import com.staxrt.tutorial.model.User;
-import com.staxrt.tutorial.repository.UserRepository;
+import com.ai.rostering.exception.ResourceNotFoundException;
+import com.ai.rostering.model.User;
+import com.ai.rostering.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

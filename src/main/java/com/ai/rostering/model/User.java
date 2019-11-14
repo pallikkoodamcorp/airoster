@@ -18,7 +18,7 @@
  *
  */
 
-package com.staxrt.tutorial.model;
+package com.ai.rostering.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

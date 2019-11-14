@@ -1,6 +1,8 @@
-package com.staxrt.tutorial;
+package com.ai.rostering.test;
 
-import com.staxrt.tutorial.model.User;
+import com.ai.rostering.Application;
+import com.ai.rostering.model.User;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -18,7 +18,7 @@
  *
  */
 
-package com.staxrt.tutorial.exception;
+package com.ai.rostering.exception;
 
 import java.util.Date;
 
