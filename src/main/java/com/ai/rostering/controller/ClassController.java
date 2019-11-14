@@ -77,6 +77,7 @@ public class ClassController {
 				st.setIdentifierValue(classroom.getClassName());
 				successTableRepository.save(st);
 			}
+			recommendationService.generateRecommendations(classroom.getPid());
 			return classroom;
 		} catch (Exception e) {
 			System.out.println("unique constriant error:" + e.getMessage());

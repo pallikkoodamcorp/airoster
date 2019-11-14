@@ -29,8 +29,8 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
 
     @Override
     public String generateRecommendations(String distpid) {
-        List<ErrorTable> errorTables =  new ArrayList<ErrorTable>();
-        List<SuccessTable> successTables = new ArrayList<SuccessTable>();
+        List<ErrorTable> errorTables =  classController.findErrorTableByPid(distpid);
+        List<SuccessTable> successTables = classController.findSuccessByPid(distpid);
         getMatchedSucessData(errorTables,successTables);
         return "";
     }
@@ -65,6 +65,7 @@ public class GenerateRecommendationServiceImpl implements GenerateRecommendation
                         recommendation.setPid(errorTable.getPid());
                         recommendation.setSystemSuggested(pattern.toString());
                         recommendationRepository.save(recommendation);
+
                     } else{
 
                     }
