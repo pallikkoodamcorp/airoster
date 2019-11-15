@@ -65,11 +65,10 @@
 
     <h2>Class Roster <span class="label label-default">AI</span></h2>
              <br><br>
-
 			<form:form method="POST" action="/uploadFile"
 		        enctype="multipart/form-data">
 		        <div class="form-group">
-			        <label for="select">Select a file to upload</label>
+			        <label for="select">Select a file to import</label> <span class="glyphicon glyphicon-import"></span>
 				    <input class="form-control" type="file" name="file" />
 				</div>
 				 <div class="form-group">
