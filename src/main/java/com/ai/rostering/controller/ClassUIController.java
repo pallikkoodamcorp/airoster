@@ -65,6 +65,7 @@ public class ClassUIController {
 			System.out.println(classroom.getClassName());
 			classRepository.save(classroom);
 
+			
 			List<ErrorTable> list = errorTableRepository.findErrorTableByPid(classroom.getPid(),
 					classroom.getClassId());
 			if (list != null && !list.isEmpty()) {
@@ -116,6 +117,13 @@ public class ClassUIController {
 					modelMap.addAttribute("result", "Import Failed, Error Code:" + errorCode);
 					List<Recommendation> recommendations = recommendationRepository
 							.findRecommendationByPidErrorCode(classroom.getPid(), errorCode);
+					for(Recommendation r : recommendations){
+						if (r.getSystemSuggested().equals("suffix_teachername")) {
+							r.setSystemSuggested(classroom.getClassName() + "_" + classroom.getTeacherUser());
+						} else if (r.getSystemSuggested().equals("prefix_teachername")) {
+							r.setSystemSuggested(classroom.getTeacherUser() + "_" + classroom.getClassName());
+						}
+					}
 					modelMap.addAttribute("recommendations", recommendations);
 					modelMap.addAttribute("userForm", new UserForm());
 				}
@@ -130,6 +138,13 @@ public class ClassUIController {
 				modelMap.addAttribute("result", "Import Failed, Error Code:" + errorCode);
 				List<Recommendation> recommendations = recommendationRepository
 						.findRecommendationByPidErrorCode(classroom.getPid(), errorCode);
+				for(Recommendation r : recommendations){
+					if (r.getSystemSuggested().equals("suffix_teachername")) {
+						r.setSystemSuggested(classroom.getClassName() + "_" + classroom.getTeacherUser());
+					} else if (r.getSystemSuggested().equals("prefix_teachername")) {
+						r.setSystemSuggested(classroom.getTeacherUser() + "_" + classroom.getClassName());
+					}
+				}
 				modelMap.addAttribute("recommendations", recommendations);
 				modelMap.addAttribute("userForm", new UserForm());
 			}

@@ -14,4 +14,6 @@ import com.ai.rostering.model.Classroom;
 public interface ClassRepository extends JpaRepository<Classroom, Long> {
 
     public Classroom findClassroomByClassId(String classId);
+    
+    public Classroom findClassroomByPid(String pid);
 }

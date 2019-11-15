@@ -39,12 +39,17 @@
     }
   </style>
 
+
  <script language = "javascript" type = "text/javascript">
- //document.getElementById("customRecomId").style.display = "none";
- var x = document.getElementById("customRecomId");
- x.style.display = "none";
+ window.onload = function() {
+	 hideDiv();
+	};
  function displayDiv(){
-	 document.getElementById("customRecomId").style.display = "block";
+	 $('.trhideclass1').show();
+ }
+ 
+ function hideDiv(){
+	 $('.trhideclass1').hide();
  }
 </script>
 
@@ -77,27 +82,20 @@
 	        </form:form>
 
             <c:choose>
-	            <c:when test= "${result=='success'}">
+	            <c:when test= "${result=='Import Success'}">
 	                <div class="alert alert-success alert-dismissible fade in">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <strong>Success!</strong> ${result}
                     </div>
 	            </c:when>
-	            <c:when test= "${result=='success'}">
+	            <c:when test= "${result=='Import Failed, Error Code:1920'}">
                     <div class="alert alert-danger alert-dismissible fade in">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <strong>Failed!</strong> ${result}
                       </div>
                 </c:when>
 	        </c:choose>
-
-	<!-- <table>
-		<tr>
-			<%--<td><c:if test="${result!=null}">${result}</c:if></td> --%>
-			<td>${result}</td>
-		</tr>
-	</table> -->
-
+	        
 	<form:form method="POST" action="/submitUserRecommendation"
 		modelAttribute="userForm">
 		<table border="1">
@@ -111,22 +109,21 @@
 
 			<c:forEach items="${recommendations}" var="recomm">
 				<tr>
-
 					<td>${recomm.pid}</td>
 					<td>${recomm.systemSuggested}</td>
-					<td><form:radiobutton path="acceptance" value="S" />Accepted <form:radiobutton
-							path="acceptance" value="I" />Ignored <form:radiobutton
-							path="acceptance" value="U" onclick="displayDiv()" />Custom</td>
+					<td>
+						<form:radiobutton path="acceptance" value="S" onclick="hideDiv()"/>Accepted 
+						<form:radiobutton path="acceptance" value="I" onclick="hideDiv()" />Ignored 
+						<form:radiobutton path="acceptance" value="U" onclick="displayDiv()" />Custom						
+					</td>
 					<form:hidden path="recommendationId" value="${recomm.id}" />
 				</tr>
 			</c:forEach>
-			<div id="customRecomId" style="display: none">
-					<tr>
-						<td>Customer Recommended Pattern</td>
-						<td><form:input path="customerRecommended" /></td>
-						<td></td>
-					</tr>
-				</div>
+			<tr class="trhideclass1">
+				<td>Customer Recommended Pattern</td>
+				<td><form:input path="customerRecommended" /></td>
+				<td></td>
+			</tr>
 			<c:if test="${recommendations!=null && !recommendations.isEmpty()}">
 				<tr>
 					<td></td>
@@ -135,12 +132,10 @@
 				</tr>
 			</c:if>
 		</table>
-
 	</form:form>
     </div>
   </div>
 </div>
-
 
 </body>
 </html>
