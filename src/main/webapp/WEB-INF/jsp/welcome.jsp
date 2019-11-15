@@ -18,7 +18,7 @@
 
     /* Set gray background color and 100% height */
     .sidenav {
-      background-color: #b3d9ff;
+      background-color: #e6f5ff;
       height: 100%;
     }
 
@@ -63,7 +63,7 @@
 
     <div class="col-sm-9">
 
-    <h4 class="col-sm-3 sidenav"><medium>Smart Rostering(Class/User)</medium></h4>
+    <h2>Class Roster <span class="label label-default">AI</span></h2>
              <br><br>
 
 			<form:form method="POST" action="/uploadFile"
