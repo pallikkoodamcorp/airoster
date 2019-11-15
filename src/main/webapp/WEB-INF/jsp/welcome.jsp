@@ -42,13 +42,30 @@
 
  <script language = "javascript" type = "text/javascript">
  window.onload = function() {
-	 hideDiv();
+	 //hideDiv(this);	 
+	 $('.trhideclass1').hide();
+	 $('.impMessage').hide();
 	};
- function displayDiv(){
+ function displayDiv(event){
+	 
+	 
+	 var acceptanceValue = $("input[name='acceptance']:checked").val()
+	 if(acceptanceValue=='S' || acceptanceValue=='U'){
+		 $('.impMessage').show();
+	 }else{
+		 $('.impMessage').hide();
+	 }
+	 
 	 $('.trhideclass1').show();
  }
  
- function hideDiv(){
+ function hideDiv(event){	 
+	 var acceptanceValue = $("input[name='acceptance']:checked").val()
+	 if(acceptanceValue=='S' || acceptanceValue=='U'){
+		 $('.impMessage').show();
+	 }else{
+		 $('.impMessage').hide();
+	 } 
 	 $('.trhideclass1').hide();
  }
 </script>
@@ -112,9 +129,9 @@
 					<td>${recomm.pid}</td>
 					<td>${recomm.systemSuggested}</td>
 					<td>
-						<form:radiobutton path="acceptance" value="S" onclick="hideDiv()"/>Accepted 
-						<form:radiobutton path="acceptance" value="I" onclick="hideDiv()" />Ignored 
-						<form:radiobutton path="acceptance" value="U" onclick="displayDiv()" />Custom						
+						<form:radiobutton path="acceptance" value="S" onclick="hideDiv(event)"/>Accepted 
+						<form:radiobutton path="acceptance" value="I" onclick="hideDiv(event)" />Ignored 
+						<form:radiobutton path="acceptance" value="U" onclick="displayDiv(event)" />Custom						
 					</td>
 					<form:hidden path="recommendationId" value="${recomm.id}" />
 				</tr>
@@ -131,8 +148,42 @@
 					<td></td>
 				</tr>
 			</c:if>
+			
+			<br/>
+			
+			<tr class="impMessage">
+				<td colspan="3"><font color="Red">* Recommendation accepted. Please submit and re-import the same file.<font></td>			
+			</tr>
 		</table>
 	</form:form>
+    </div>
+    <div class="col-sm-9">
+    	<c:if test="${classrooms!=null && !classrooms.isEmpty()}">
+			<table border="1">
+				<tr>
+					<th>District PID</th>
+					<th>Class ID</th>
+					<th>Class Name</th>
+					<th>Teacher Name</th>
+					<th>Grade</th>
+					<th>Admin Name</th>
+				</tr>
+			</c:if>
+			
+	
+		<c:forEach items="${classrooms}" var="classroomObj">
+				<tr>
+					<td>${classroomObj.pid}</td>
+					<td>${classroomObj.classId}</td>
+					<td>${classroomObj.className}</td>					
+					<td>${classroomObj.teacherUser}</td>
+					<td>${classroomObj.grade}</td>
+					<td>${classroomObj.createdBy}</td>					
+				</tr>
+		</c:forEach>
+		<c:if test="${classrooms!=null && !classrooms.isEmpty()}">
+			</table>
+			</c:if>
     </div>
   </div>
 </div>

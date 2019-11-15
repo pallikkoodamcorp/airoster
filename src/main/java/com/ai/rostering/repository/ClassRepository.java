@@ -1,5 +1,7 @@
 package com.ai.rostering.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,5 @@ public interface ClassRepository extends JpaRepository<Classroom, Long> {
 
     public Classroom findClassroomByClassId(String classId);
     
-    public Classroom findClassroomByPid(String pid);
+    public List<Classroom> findClassroomByPid(String pid);
 }

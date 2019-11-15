@@ -64,7 +64,9 @@ public class ClassUIController {
 			classroom = g.fromJson(content, Classroom.class);
 			System.out.println(classroom.getClassName());
 			classRepository.save(classroom);
-
+			
+			List<Classroom> classrooms = classRepository.findClassroomByPid(classroom.getPid());
+			modelMap.addAttribute("classrooms", classrooms);
 			
 			List<ErrorTable> list = errorTableRepository.findErrorTableByPid(classroom.getPid(),
 					classroom.getClassId());
@@ -93,11 +95,19 @@ public class ClassUIController {
 				if (acc!= null && acc.equals("S")) {
 					sugg = rec.getSystemSuggested();
 					recommendationService.applyRecommendations(classroom, sugg);
+					
+					List<Classroom> classrooms = classRepository.findClassroomByPid(classroom.getPid());
+					modelMap.addAttribute("classrooms", classrooms);
+					
 					modelMap.addAttribute("userForm", new UserForm());
 					modelMap.addAttribute("result", "Import Success");
 				} else if (acc!=null && acc.equals("U")) {
 					sugg = rec.getUserSuggested();
 					recommendationService.applyRecommendations(classroom, sugg);
+					
+					List<Classroom> classrooms = classRepository.findClassroomByPid(classroom.getPid());
+					modelMap.addAttribute("classrooms", classrooms);
+					
 					modelMap.addAttribute("userForm", new UserForm());
 					modelMap.addAttribute("result", "Import Success");
 				}else if (acc!=null && acc.equals("I")) {
